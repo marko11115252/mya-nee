@@ -165,4 +165,27 @@ function play(guild, song) {
   serverQueue.textChannel.send(`Now playing: **${song.title}**`);
 }
 
+/// gif api
+
+if(command == "gif"){
+  var searchPromise = modSearchGif.searchForGif("wataten");
+
+  searchPromise.then((gif) => {
+    message.channel.send(gif);
+  })  
+}
+
+const searchForGif = (gifName) => {
+  return client.search('gifs', {"q": gifName, "limit": 1})
+         .then((response) => {
+           var gif = response.data[0].url;
+           return gif;
+         })
+         .catch((err) => {
+           return err;
+         })
+}
+
+
+
 client.login(token);
